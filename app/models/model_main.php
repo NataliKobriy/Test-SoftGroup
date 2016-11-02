@@ -27,7 +27,7 @@ class Model_Main extends Model
         return $result;
 
     }
-    public function dataFilter ($table, $data, $parameter) {
+    public function dataSort ($table, $data, $parameter) {
         $t = "SELECT * FROM $table ORDER BY $data $parameter";
         $query = sprintf($t, mysqli_real_escape_string($this->link, $data));
         $result = $this->msql->Select($query);
@@ -35,18 +35,28 @@ class Model_Main extends Model
 
     }
 
-
-    public function getUser ($parameter1, $table, $data, $parameter2) {
-        $t = "SELECT $parameter1  FROM $table WHERE $parameter2 = '$data'";
+    public function getUser ($parameter1, $table, $data, $parameter2, $condition) {
+        $t = "SELECT $parameter1  FROM $table WHERE $parameter2 $condition '$data'";
         $query = sprintf($t, mysqli_real_escape_string($this->link, $data));
         $result = $this->msql->Select($query);
         return $result;
     }
 
-    public function gerSortData ($table, $id) {
-        $t = "SELECT * FROM $table WHERE id_generals = $id";
-        $query = sprintf($t, mysqli_real_escape_string($this->link, $id));
-        $result = $this->msql->Select($query);
-        return $result;
-}
+    function getPage ($table, $parameter, $condition1, $surname, $condition2) {
+        $t = "SELECT * FROM $table WHERE $parameter $condition1 $surname ORDER BY $parameter $condition2";
+        $result = $this->msql->Select($t);
+        foreach ($result as $key => $value) {
+            return $value;
+        }
+    }
+
+
+    function getId ($table, $parameter, $condition) {
+        $t = "SELECT * FROM $table ORDER BY $parameter $condition";
+        $result = $this->msql->Select($t);
+        foreach ($result as $key => $value) {
+            return $value;
+        }
+    }
+
  }

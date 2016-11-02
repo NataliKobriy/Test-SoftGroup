@@ -2,58 +2,65 @@
 
 class Route {
 
-    static function start(){
 
-        $controller_name = 'Main';
-        $action_name = 'index';
-        $model_name = 'Main';
+    protected static $routes = [];
+    protected static $route = [];
 
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+  public static function add ($regexp, $route = []) {
+    self::$routes[$regexp] = $route;
 
+  }
 
-        if (!empty($routes[1])){
-            $controller_name = $routes[1];
-        }
+  public static function getRoutes() {
+      return self::$routes;
+  }
 
-        if (!empty($routes[2])){
-            $action_name = $routes[2];
-        }
+  public static function getRoute() {
+      return self::$route;
+  }
 
+  public static function matchRoute ($url) {
+      foreach (self::$routes as $pattern => $route) {
+          if (preg_match("#$pattern#i", $url, $matches)) {
+              foreach ($matches as $key => $value) {
+                  if (is_string($key)) {
+                      $route[$key] = $value;
+                  }
+              }
+              if (!isset($route['action'])) {
+                  $route['action'] = 'index';
+              }
+              self::$route = $route;
+              return true;
+          }
+      }
+      return false;
+  }
 
-       $model_name = 'Model_'.$model_name;
-        $controller_name = 'Controller_'.$controller_name;
-        $action_name = 'action_'.$action_name;
-
-        $model_file = strtolower($model_name).'.php';
-        $model_path = "app/models/".$model_file;
-        if(file_exists($model_path)){
-            include $model_path;
-        }
-
-        $controller_file = strtolower($controller_name).'.php';
-        $controller_path = "app/controllers/".$controller_file;
-        if(file_exists($controller_path)){
-            include $controller_path;
-        }else{
-            Route::ErrorPage404();
-        }
-
-        $controller = new $controller_name;
-        $action = $action_name;
-
-        if(method_exists($controller, $action)){
-            $controller->$action();
-        }else{
-            Route::ErrorPage404();
-        }
-
-    }
+  public static function dispatch($url) {
+      if (self::matchRoute($url)) {
+            $controller = 'controller_' . self::$route['controller'];
+          if (class_exists($controller)) {
+              $cObj = new $controller;
+              $action = 'action_' . self::$route['action'];
+              if (method_exists($cObj, $action)) {
+                  $cObj->$action();
+              } else {
+                  Route::ErrorPage404();
+              }
+          } else {
+              Route::ErrorPage404();
+          }
+      } else {
+          http_response_code(404);
+          Route::ErrorPage404();
+      }
+  }
 
     static function ErrorPage404(){
-        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        header('HTTP/1.1 404 Not Found');
-        header('Status: 404 Not Found');
-        header('Location:'.$host.'404');
+        $error = Controller_404::Instance();
+        $error->action_index();
     }
 
 }
+

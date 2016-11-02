@@ -6,16 +6,16 @@
         <thead>
         <tr>
             <th class="col-md-1">№</th>
-            <th class="col-md-2"><a href="main/index/?filter=name">Ім'я</a></th>
-            <th class="col-md-3"><a href="main/index/?filter=surname">Прізвище</a></th>
-            <th class="col-md-2"><a href="main/index/?filter=year">Рік народження</a></th>
+            <th class="col-md-2"><a href="/main/index?filter=name" class="active">Ім'я</a></th>
+            <th class="col-md-3"><a href="/main/index?filter=surname" class="active">Прізвище</a></th>
+            <th class="col-md-2"><a href="/main/index?filter=year" class="active">Рік народження</a></th>
         </tr>
         </thead>
         {% for generals in data %}
         <tr>
             <td>{{ loop.index }}</td>
             <td>{{ generals.name }}</td>
-            <td><a href="/about/index/?id={{ generals.id_generals }}" class="active">{{ generals.surname }}</a></td>
+            <td><a href="/about/index?id={{ generals.id_generals }}" class="active">{{ generals.surname }}</a></td>
             <td>{{ generals.year }}</td>
         </tr>
         {% endfor %}

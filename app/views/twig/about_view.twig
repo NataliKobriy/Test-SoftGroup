@@ -5,12 +5,15 @@
             <div class="text">
                 <img src="/app/views/photos/{{ generals.photos }}" alt="{{ generals.photos }}" class="img-rounded">
                 {{ generals.bibliographic }}
-            </div>
-        {% endfor %}
-    <a href="/">Головна сторінка</a>
-    {% for generals in data %}
-           <a href="/about/prev/?id={{ generals.id_generals }}">Попередня сторінка</a>
-           <a href="/about/index/?id={{ generals.id_generals }}">Наступна сторінка</a>
 
-    {% endfor %}
+        {% endfor %}
+    <div class="href">
+        {% for generals in data %}
+            <a href="/about/prev?id={{ generals.id_generals }}" style="float: left">Попередня сторінка</a>
+            <a href="/">Головна сторінкa</a>
+            <a href="/about/next?id={{ generals.id_generals }}" style="float: right">Наступна сторінка</a>
+        {% endfor %}
+    </div>
+    </div>
+
 {% endblock %}

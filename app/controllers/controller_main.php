@@ -13,10 +13,11 @@ class Controller_Main extends Controller {
 
     function action_index()
     {
+//
         $this->result = $this->msql->getAllData('generals');
 
         if (isset($_GET['filter'])) {
-            $this->result = $this->msql->dataFilter('generals', $_GET['filter'], 'ASC');
+            $this->result = $this->msql->dataSort('generals', $_GET['filter'], 'ASC');
         }
 
         $this->view->generate('main_view.twig', array('data' => $this->result));

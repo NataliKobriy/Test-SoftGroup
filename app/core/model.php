@@ -20,12 +20,13 @@ class Model
             printf("Не вдалося підключитися %s\n", mysqli_connect_error());
             exit();
         }
-//        mysqli_set_charset($this->link, "cp1251_ukrainian_ci");
+        mysqli_set_charset($this->link, "cp1251_ukrainian_ci");
 
     }
 
     public function Select($query)
     {
+
         $result = mysqli_query($this->link, $query);
 
         if (!$result)
@@ -39,9 +40,6 @@ class Model
             $row = mysqli_fetch_assoc($result);
             $arr[] = $row;
         }
-
         return $arr;
     }
-
-
 }

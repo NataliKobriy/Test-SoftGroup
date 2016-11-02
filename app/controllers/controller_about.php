@@ -4,6 +4,7 @@ class Controller_About extends Controller {
 
     private $result;
     private $msql;
+    private $error;
 
     public function __construct()
     {
@@ -14,20 +15,41 @@ class Controller_About extends Controller {
 
     function action_prev () {
         if (isset($_GET['id'])) {
+            $sort = $this->msql->dataSort('generals', 'surname', 'ASC');
+            $prev = $this->msql->getPage('generals', 'id_generals','<', $_GET['id'], 'DESC LIMIT 1');
+            $this->result = $this->msql->getUser('*', 'dataGenerals', $prev['id_generals'], 'id_generals', '=');
 
-        $this->action_view();
+        }
+            if (empty($prev['id_generals'])) {
+                $nextId = $this->msql->getId('generals', 'surname', 'DESC LIMIT 1');
+                $this->result = $this->msql->getUser('*', 'dataGenerals', $nextId['id_generals'], 'id_generals', '=');
+        }
+            $this->action_view();
+    }
+
+    function action_next () {
+        if (isset($_GET['id'])) {
+            $sort = $this->msql->dataSort('generals', 'surname', 'ASC');
+            $next = $this->msql->getPage('generals', 'id_generals', '>', $_GET['id'], 'LIMIT 1');
+            $this->result = $this->msql->getUser('*', 'dataGenerals', $next['id_generals'], 'id_generals', '=');
+
+            if (empty($next['id_generals'])) {
+                $prevId = $this->msql->getId('generals', 'surname', 'ASC LIMIT 1');
+                $this->result = $this->msql->getUser('*', 'dataGenerals', $prevId['id_generals'], 'id_generals', '=');
+            }
+            $this->action_view();
         }
     }
 
     function action_index () {
         if (isset($_GET['id'])) {
-            $this->result = $this->msql->getUser('*', 'dataGenerals', $_GET['id'], 'id_generals');
+            $this->result = $this->msql->getUser('*', 'dataGenerals', $_GET['id'], 'id_generals', '=');
         }
         $this->action_view();
     }
 
     function action_view () {
-        $this->view->generate('about_view.twig', array('data' => $this->result));
+        $this->view->generate('about_view.twig', array('data' => $this->result, 'error' => $this->error));
 
     }
 }
