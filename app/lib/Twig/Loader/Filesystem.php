@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Twig.
  *
@@ -14,7 +13,7 @@
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Loader_Filesystem implements Twig_LoaderInterface, Twig_ExistsLoaderInterface
+class Twig_Loader_Filesystem implements Twig_LoaderInterface , Twig_ExistsLoaderInterface
 {
     /** Identifier of the main namespace. */
     const MAIN_NAMESPACE = '__main__';

@@ -1,38 +1,20 @@
 <?php
-define('WWW' , __DIR__);
-define('CORE' , dirname(__DIR__) . 'app/core');
-define('ROOT' , dirname(__DIR__));
-define('APP' , dirname(__DIR__) . '/app');
-spl_autoload_register(function ($class){
-    $route = APP . "/core/$class.php";
-    $controller = APP . "/controllers/$class.php";
-    if (is_file($controller)) {
-        include_once $controller;
-    }
-    $model = APP . "/models/$class.php";
-    if (is_file($model)) {
-        include_once $model;
-    }
-    $view = APP . "/views/$class.php";
-    if (is_file($view)) {
-        include_once $view;
-    }
-    $core_controller = APP . "/core/$class.php";
-    if (is_file($core_controller)) {
-        include_once $core_controller;
-    }
-    $core_model = APP . "/core/$class.php";
-    if (is_file($core_model)) {
-        include_once $core_model;
-    }
-    $core_view = APP . "/core/$class.php";
-    if (is_file($core_view)) {
-        include_once $core_view;
-    }
-});
 
+use \app\core\Route as router;
+use \app\core\Controller as controller_base;
+use \app\core\View as view;
+include 'D:\Programing\Web\Program Files\OpenServer\domains\project\app\lib\Twig\Autoloader.php';
+Twig_Autoloader::register();
+
+function __autoload ($class) {
+       $class = str_replace("\\","/",$class);
+       include $class .'.php';
+}
+
+var_dump(new view());
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
-Route::add('^$', ['controller' => 'Main', 'action' => 'index']);
-Route::add('(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)?');
-Route::dispatch($query);
+router::add('^$', ['controller' => 'Main', 'action' => 'index']);
+router::add('(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)?');
+router::dispatch($query);
+

@@ -1,5 +1,4 @@
 <?php
-
 class Model_Main extends Model
 {
     private static $instance;
@@ -58,5 +57,12 @@ class Model_Main extends Model
             return $value;
         }
     }
-
- }
+    function isSetId ($table, $parameter, $data) {
+        $t = "SELECT  $parameter FROM $table WHERE $parameter = $data";
+        $query = sprintf($t, mysqli_real_escape_string($this->link, $data));
+        $result = $this->msql->Select($query);
+        foreach ($result as $key => $value) {
+            return $value;
+        }
+    }
+}

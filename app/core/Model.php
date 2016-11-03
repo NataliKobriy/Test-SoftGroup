@@ -1,6 +1,5 @@
 <?php
-
-class Model
+ class Model
 {
     private static $instance;
     public $link;

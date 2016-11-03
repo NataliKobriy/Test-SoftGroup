@@ -1,5 +1,5 @@
 <?php
-
+namespace app\core;
 class Controller {
 
     public $model;
@@ -17,7 +17,6 @@ class Controller {
     }
 
     function action_index(){
-
     }
 
 }

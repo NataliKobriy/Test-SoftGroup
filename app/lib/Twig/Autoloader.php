@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Twig.
  *
@@ -8,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 @trigger_error('The Twig_Autoloader class is deprecated since version 1.21 and will be removed in 2.0. Use Composer instead.', E_USER_DEPRECATED);
 
 /**
