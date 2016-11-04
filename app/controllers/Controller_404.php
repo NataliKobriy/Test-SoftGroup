@@ -1,6 +1,9 @@
 <?php
+namespace app\controllers;
 
-class Controller_404 extends Controller {
+use app\core\Controller;
+
+class Controller_404 extends Controller  {
 
     private static $instance;
 

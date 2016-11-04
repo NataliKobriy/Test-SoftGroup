@@ -1,4 +1,7 @@
 <?php
+namespace app\core;
+
+
  class Model
 {
     private static $instance;

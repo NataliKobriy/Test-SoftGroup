@@ -1,20 +1,20 @@
 <?php
 
-use \app\core\Route as router;
-use \app\core\Controller as controller_base;
-use \app\core\View as view;
-include 'D:\Programing\Web\Program Files\OpenServer\domains\project\app\lib\Twig\Autoloader.php';
-Twig_Autoloader::register();
+use \app\core\Route as Route;
 
-function __autoload ($class) {
-       $class = str_replace("\\","/",$class);
-       include $class .'.php';
-}
 
-var_dump(new view());
+include 'lib\Twig\Autoloader.php';
+\Twig_Autoloader::register();
+
+spl_autoload_register(function ($class){
+ //   echo "<br>";
+    $class = str_replace("\\","/",$class);
+    include $class .'.php';
+});
+
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
-router::add('^$', ['controller' => 'Main', 'action' => 'index']);
-router::add('(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)?');
-router::dispatch($query);
+Route::add('^$', ['controller' => 'Users', 'action' => 'index']);
+Route::add('(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)?');
+Route::dispatch($query);
 

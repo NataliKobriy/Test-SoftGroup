@@ -1,5 +1,4 @@
 <?php
-
 namespace app\core;
 
 class Route {
@@ -32,26 +31,28 @@ class Route {
         return false;
     }
     public static function dispatch($url) {
-        if (self::matchRoute($url)) {
-            $controller = 'Controller_' . self::$route['controller'];
-            if (class_exists($controller)) {
-                $cObj = new $controller;
-                $action = 'action_' . self::$route['action'];
-                if (method_exists($cObj, $action)) {
-                    $cObj->$action();
+            if (self::matchRoute($url)) {
+                $controller = '\app\controllers\Controller_' . self::$route['controller'];
+                if (class_exists($controller)) {
+                    $cObj = new $controller;
+                    $action = 'action_' . self::$route['action'];
+                    if (method_exists($cObj, $action)) {
+                        $cObj->$action();
+                    } else {
+                        Route::ErrorPage404();
+                    }
                 } else {
                     Route::ErrorPage404();
                 }
             } else {
+                http_response_code(404);
                 Route::ErrorPage404();
             }
-        } else {
-            http_response_code(404);
-            Route::ErrorPage404();
-        }
+
+
     }
     static function ErrorPage404(){
-        $error = Controller_404::Instance();
+        $error = \app\controllers\Controller_404::Instance();
         $error->action_index();
     }
 }

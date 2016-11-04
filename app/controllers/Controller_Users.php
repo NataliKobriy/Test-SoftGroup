@@ -1,5 +1,10 @@
 <?php
-class Controller_Main extends Controller {
+namespace app\controllers;
+
+use app\core\Controller;
+use app\models\Model_Main;
+
+class Controller_Users extends Controller   {
 
     private $result;
     private $msql;

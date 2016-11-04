@@ -1,7 +1,11 @@
 <?php
 
+namespace app\controllers;
 
-class Controller_About extends Controller {
+use app\core\Controller;
+use app\models\Model_Main;
+
+class Controller_About extends Controller  {
 
     private $result;
     private $msql;
