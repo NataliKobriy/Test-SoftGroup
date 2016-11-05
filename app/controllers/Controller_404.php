@@ -16,8 +16,8 @@ class Controller_404 extends Controller  {
 
     }
 
-    public function action_index()
+    public function action_index_404()
     {
-        $this->view->generate('view_404.twig', array());
+        $this->view->generate('404_view.twig', array());
     }
 }

@@ -22,7 +22,8 @@ class Controller_About extends Controller  {
             $id = $this->msql->isSetId('generals', 'id_generals', $_GET['id']);
             if ($id == null) {
                 $error = Controller_404::Instance();
-                $error = $error->action_index();
+                $error = $error->action_index_404();
+                return false;
             } else {
                 $sort = $this->msql->dataSort('generals', 'surname', 'ASC');
                 $prev = $this->msql->getPage('generals', 'id_generals','<', $_GET['id'], 'DESC LIMIT 1');
@@ -41,7 +42,8 @@ class Controller_About extends Controller  {
             $id = $this->msql->isSetId('generals', 'id_generals', $_GET['id']);
             if ($id == null) {
                 $error = Controller_404::Instance();
-                $error = $error->action_index();
+                $error = $error->action_index_404();
+                return false;
             } else {
                 $sort = $this->msql->dataSort('generals', 'surname', 'ASC');
                 $next = $this->msql->getPage('generals', 'id_generals', '>', $_GET['id'], 'LIMIT 1');
@@ -52,8 +54,8 @@ class Controller_About extends Controller  {
                     $this->result = $this->msql->getUser('*', 'dataGenerals', $prevId['id_generals'], 'id_generals', '=');
                 }
             }
-            $this->action_view();
         }
+        $this->action_view();
     }
 
     function action_index () {
@@ -61,7 +63,7 @@ class Controller_About extends Controller  {
             $id = $this->msql->isSetId('generals', 'id_generals', $_GET['id']);
             if ($id == null) {
                 $error = Controller_404::Instance();
-                $error = $error->action_index();
+                $error = $error->action_index_404();
             } else {
                 $this->result = $this->msql->getUser('*', 'dataGenerals', $_GET['id'], 'id_generals', '=');
             }

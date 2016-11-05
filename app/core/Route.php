@@ -52,6 +52,6 @@ class Route {
     }
     static function ErrorPage404(){
         $error = \app\controllers\Controller_404::Instance();
-        $error->action_index();
+        $error->action_index_404();
     }
 }

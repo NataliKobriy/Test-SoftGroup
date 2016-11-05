@@ -9,12 +9,12 @@ html, body {
     line-height: 0.1;
     padding: 1em;
     text-align: right;
-    margin-top: -39px;
+    margin-top: -52px;
     /*min-width: 980px;*/
 
 }
 .empty {
-    height: 65px;
+    height: 75px;
 }
 .wrapper {
     min-height: 100%;
@@ -63,7 +63,6 @@ caption {
 }
 A:link {
     text-decoration: none;
-    /*font: 20px 'Libre Baskerville', serif;*/
 }
 .href {
     padding-top: 5%;
