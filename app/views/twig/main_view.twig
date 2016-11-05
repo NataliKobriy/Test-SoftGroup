@@ -1,16 +1,16 @@
 {% extends "layout.twig" %}
 {% block content %}
-
-    <table class="table table-hover">
+    <table class="table table-hover" id="table-wrapper">
         <caption><b>Генерали армії УНР</b></caption>
         <thead>
         <tr>
             <th class="col-md-1">№</th>
-            <th class="col-md-2"><a href="/users/index?filter=name" class="active">Ім'я</a></th>
-            <th class="col-md-3"><a href="/users/index?filter=surname" class="active">Прізвище</a></th>
-            <th class="col-md-2"><a href="/users/index?filter=year" class="active">Рік народження</a></th>
+            <th class="col-md-2" data-value="name">Ім'я</th>
+            <th class="col-md-3" data-value="surname">Прізвище</th>
+            <th class="col-md-2" data-value="year">Рік народження</th>
         </tr>
         </thead>
+        <tbody>
         {% for generals in data %}
         <tr>
             <td>{{ loop.index }}</td>
@@ -19,5 +19,35 @@
             <td>{{ generals.year }}</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
+    <script>
+        $('document').ready(function()
+        {
+            $('#table-wrapper').on("click", "th", function()
+            {
+                value = $(this).attr('data-value');
+                table = $(this).parent().parent().parent().children('tbody');
+                query = "filter=" + value;
+                tr =  table.children('tr');
+                $.ajax({
+                    url: '/users/get',
+                    method: 'POST',
+                    data: query,
+                    success: function(general)
+                    {
+                        for (i=0; i < general.length; i++) {
+                            $(tr[i]).replaceWith('<tr>' +
+                                    '<td>' + (i+1) + '</td>' +
+                                    '<td>' + general[i]['name'] + '</td>' +
+                                    '<td><a href="/about/index?id=' + general[i]['id_generals'] + '">' + general[i]['surname'] + '</td>' +
+                                    '<td>' + general[i]['year'] + '</td>' +
+                                    '</tr>');
+                        }
+                    },
+                    dataType: "json"
+                });
+            });
+        });
+    </script>
 {% endblock %}

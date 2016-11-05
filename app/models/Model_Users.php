@@ -1,7 +1,6 @@
 <?php
 namespace app\models;
 
-use app\core\Model;
 use app\core\Model_Base;
 
 class Model_Users extends Model_Base

@@ -3,7 +3,6 @@ namespace app\core;
 
 class View {
     private $twig;
-    protected $result;
     function __construct()
     {
         $loader = new \Twig_Loader_Filesystem(dirname(__DIR__).'/views/twig');

@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\models\Model_Main;
+use app\models\Model_Users;
 
 class Controller_About extends Controller  {
 
@@ -13,7 +13,7 @@ class Controller_About extends Controller  {
     public function __construct()
     {
         parent::__construct();
-        $this->msql =  Model_Main::Instance();
+        $this->msql =  Model_Users::Instance();
 
     }
 

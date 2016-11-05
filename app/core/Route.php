@@ -45,7 +45,6 @@ class Route {
                     Route::ErrorPage404();
                 }
             } else {
-                http_response_code(404);
                 Route::ErrorPage404();
             }
 

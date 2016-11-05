@@ -31,6 +31,7 @@ caption {
     text-align: center;
     color: black;
     font-size: larger;
+
 }
 .table th {
     text-align: center;
@@ -62,7 +63,7 @@ caption {
 }
 A:link {
     text-decoration: none;
-    font: 20px 'Libre Baskerville', serif;
+    /*font: 20px 'Libre Baskerville', serif;*/
 }
 .href {
     padding-top: 5%;

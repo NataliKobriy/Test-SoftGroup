@@ -4,7 +4,9 @@
         {% for generals in data %}
             <div class="text">
                 <img src="/app/views/photos/{{ generals.photos }}" alt="{{ generals.photos }}" class="img-rounded">
+            {% autoescape false %}
                 {{ generals.bibliographic }}
+            {% endautoescape %}
 
         {% endfor %}
     <div class="href">
