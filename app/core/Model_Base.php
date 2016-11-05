@@ -2,7 +2,7 @@
 namespace app\core;
 
 
- class Model
+ class Model_Base
 {
     private static $instance;
     public $link;
@@ -10,7 +10,7 @@ namespace app\core;
     public static function Instance()
     {
         if (self::$instance == null)
-            self::$instance = new Model();
+            self::$instance = new Model_Base();
 
         return self::$instance;
 

@@ -2,8 +2,9 @@
 namespace app\models;
 
 use app\core\Model;
+use app\core\Model_Base;
 
-class Model_Main extends Model
+class Model_Users extends Model_Base
 {
     private static $instance;
     public $table;
@@ -12,7 +13,7 @@ class Model_Main extends Model
     public static function Instance()
     {
         if (self::$instance == null)
-            self::$instance = new Model_Main();
+            self::$instance = new Model_Users();
 
         return self::$instance;
     }
@@ -20,7 +21,7 @@ class Model_Main extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->msql = Model::Instance();
+        $this->msql = Model_Base::Instance();
 
     }
 
