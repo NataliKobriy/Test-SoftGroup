@@ -14,7 +14,7 @@ class Controller_Users extends Controller   {
     {
 //
         $this->result = $this->msql->getAllData('generals');
-        $this->view->generate('main_view.twig', array('data' => $this->result));
+        $this->view->generate('users_view.twig', array('data' => $this->result));
     }
 
     function action_get () {
