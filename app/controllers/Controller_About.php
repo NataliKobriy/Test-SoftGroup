@@ -26,7 +26,6 @@ class Controller_About extends Controller  {
                 $error = $error->action_index_404();
                 return false;
             } else {
- //               $sort = $this->msql->dataSort('generals', 'surname', 'ASC');
                 $this->prev = $this->msql->getPage('<', $_GET['id'], 'DESC LIMIT 1');
                 $this->next = $this->msql->getPage('>', $_GET['id'], 'LIMIT 1');
                 if (empty($this->prev['id_generals'])) {
