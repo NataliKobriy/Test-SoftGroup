@@ -10,8 +10,6 @@ html, body {
     padding: 1em;
     text-align: right;
     margin-top: -52px;
-    /*min-width: 980px;*/
-
 }
 .empty {
     height: 75px;
