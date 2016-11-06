@@ -11,9 +11,9 @@
         {% endfor %}
     <div class="href">
         {% for generals in data %}
-            <a href="/about/prev?id={{ generals.id_generals }}" style="float: left">Попередня сторінка</a>
+            <a href="/about/index?id={{ prev.id_generals }}" style="float: left">{{ prev.surname }}</a>
             <a href="/">Головна сторінкa</a>
-            <a href="/about/next?id={{ generals.id_generals }}" style="float: right">Наступна сторінка</a>
+            <a href="/about/index?id={{ next.id_generals }}" style="float: right">{{ next.surname }}</a>
         {% endfor %}
     </div>
     </div>

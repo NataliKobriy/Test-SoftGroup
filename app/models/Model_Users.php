@@ -45,9 +45,11 @@ class Model_Users extends Model_Base
         return $result;
     }
 
-    function getPage ($table, $parameter, $condition1, $surname, $condition2) {
-        $t = "SELECT * FROM $table WHERE $parameter $condition1 $surname ORDER BY $parameter $condition2";
-        $result = $this->msql->Select($t);
+    function getPage ( $parameter, $id, $condition) {
+        $t = "SELECT * FROM `generals` WHERE `surname` $parameter
+            (select surname from generals where id_generals = $id) ORDER BY `surname` $condition";
+        $query = sprintf($t, mysqli_real_escape_string($this->link, $id));
+        $result = $this->msql->Select($query);
         foreach ($result as $key => $value) {
             return $value;
         }
