@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 07 2016 г., 00:11
+-- Время создания: Ноя 07 2016 г., 00:37
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.6.23
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `dataGenerals` (
   `id_dataGenerals` int(11) NOT NULL,
-  `photos` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `bibliographic` text CHARACTER SET utf8 NOT NULL,
+  `photos` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `bibliographic` text COLLATE utf8_unicode_ci NOT NULL,
   `id_generals` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
